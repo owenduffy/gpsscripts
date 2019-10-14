@@ -4,7 +4,7 @@ if *%1==* goto usage
 set ERROR=0.005k
 set FILE=%1
 set NAME=%~d1%~p1%~n1
-set colour=ff0000bf
+set colour=ffbf00bf
 if not *%2==* set colour=%2
 set GPSBABEL="D:\Program Files (x86)\GPSBabel\GPSBabel"
 set ZIP=zip
