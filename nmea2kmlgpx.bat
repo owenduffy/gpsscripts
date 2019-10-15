@@ -13,7 +13,7 @@ echo working, may take a while...
 goto end
 
 :usage
-echo nmea2kml filename [color]
+echo nmea2kmlgpx filename [color]
 
 :end
 pause
