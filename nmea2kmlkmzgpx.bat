@@ -3,7 +3,7 @@ if *%1==* goto usage
 
 set ERROR=0.010k
 set colour=ffbf00bf
-set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x validate,debug -x discard,hdop=20 -x validate,debug  -x position,distance=10m -x validate,debug  -x simplify,error=%ERROR%  -x validate,debug  
+set GPSBABELFILTER=-x discard,fixnone,fixunknown,hdop=20 -x validate,debug -x position,distance=10m -x validate,debug -x simplify,error=%ERROR% -x validate,debug  
 
 set GPSBABEL="D:\Program Files (x86)\GPSBabel\GPSBabel"
 set ZIP=C:\BIN\7za.exe
