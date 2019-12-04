@@ -10,7 +10,10 @@ rem set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x validate,debug -x trans
 set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x validate,debug -x discard,hdop=20 -x simplify,count=20,average -x validate,debug -x simplify,count=1,decimate -x validate,debug  -x simplify,error=%ERROR%  -x validate,debug  
 rem set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x simplify,count=5,decimate -x simplify,error=%ERROR%
 set colour=ffbf00bf
-set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x validate,debug -x discard,hdop=20 -x validate,debug -x simplify,count=1,decimate -x validate,debug  -x simplify,error=%ERROR%  -x validate,debug  
+set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x validate,debug -x discard,hdop=20 -x validate,debug -x simplify,count=5,decimate -x validate,debug  -x simplify,error=%ERROR%  -x validate,debug
+set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x validate,debug -x discard,hdop=20 -x validate,debug  -x position,distance=10m -x validate,debug  -x simplify,error=%ERROR%  -x validate,debug  
+rem set GPSBABELFILTER=-x discard,fixnone,fixunknown  -x validate,debug -x discard,hdop=20 -x validate,debug  -x simplify,error=%ERROR%  -x validate,debug  
+  
 
 set GPSBABEL="D:\Program Files (x86)\GPSBabel\GPSBabel"
 set ZIP=C:\BIN\7za.exe
@@ -33,9 +36,8 @@ rem replace EOF characters in nmea file
 %TR% \032 " " <%FILE% >%WORKFILE%
 
 echo working, may take a while...
-%GPSBABEL% -i nmea -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%colour%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx" |gnomon -r=false 
 rem %GPSBABEL% -i nmea -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%colour%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx" |gnomon -r=false 
-rem %GPSBABEL% -i nmea -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%colour%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx" 
+%GPSBABEL% -i nmea -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%colour%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx" 
 del /q "%WORKFILE%" >nul 2>&1
 
 if not exist %ZIP% goto end
