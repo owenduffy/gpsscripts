@@ -5,6 +5,10 @@ if *%1==* goto usage
 
 rem see GRPSBABEL for more info
 
+
+rem %GPSBABEL% -i nmea,ignore_fix -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%colour%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx" |gnomon -r=false
+
+
 rem edit these to suit environment and requirements
 set ERROR=0.010k
 rem a good filter set form reducing 1s NMEA to reasonably accurate vehicle track
@@ -13,6 +17,9 @@ rem a good filter set form reducing 1s NMEA to reasonably accurate vehicle track
 rem set GPSBABELFILTER=-x validate,debug -x discard,fixnone,fixunknown,hdop=20 -x track,start=20190101,stop=20380101 -x validate,debug -x validate,debug -x position,distance=10m -x validate,debug -x simplify,error=%ERROR% -x validate,debug  
 rem color=ABGR
 set color=ffbf00bf
+set ERROR=0.010k
+set GPSBABELFILTER=-x validate,debug -x discard,hdop=20 -x validate,debug -x position,distance=5m -x validate,debug -x simplify,error=%ERROR% -x validate,debug
+set NMEAOPTS=nmea,ignore_fix
 
 rem edit these paths to your programs
 set GPSBABEL="D:\Program Files (x86)\GPSBabel\GPSBabel"
@@ -38,7 +45,8 @@ rem replace EOF characters in nmea file
 
 echo working, may take a while...
 @echo on
-%GPSBABEL% -i nmea -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%color%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx"
+rem %GPSBABEL% -i %NMEAOPTS% -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%color%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx"
+%GPSBABEL% -i %NMEAOPTS% -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%color%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx"
 @echo off
 del /q "%WORKFILE%" >nul 2>&1
 
