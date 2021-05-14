@@ -45,8 +45,8 @@ rem replace EOF characters in nmea file
 
 echo working, may take a while...
 @echo on
-rem %GPSBABEL% -i %NMEAOPTS% -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%color%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx"
-%GPSBABEL% -i %NMEAOPTS% -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,line_color=%color%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx"
+rem %GPSBABEL% -i %NMEAOPTS% -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,lines=0,line_color=%color%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx"
+%GPSBABEL% -i %NMEAOPTS% -f "%WORKFILE%"  %GPSBABELFILTER% -o kml,track=1,points=0,labels=0,lines=0,line_color=%color%,line_width=3 -F "%NAME%.kml" -o gpx -F "%NAME%.gpx"
 @echo off
 del /q "%WORKFILE%" >nul 2>&1
 
